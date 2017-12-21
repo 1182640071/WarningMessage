@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+
+	<common>
+            <userName>test</userName>
+            <passWord>test</passWord>
+            <URL>127.0.0.1</URL>
+            <prot>9988</prot>
+            <!-- 数据库配置表更新时间间隔 1000/s-->
+            <timeRun>60000</timeRun>
+            <!-- main() sleep time -->
+            <sleepTime>30000</sleepTime>
+            <!-- 规定线程池中线程最大数量 -->
+            <threadCount>200</threadCount>
+            <!-- 线程超时设置 -->
+            <limt_time>10</limt_time>
+            <!-- 每次报警完后更新表sql语句 -->
+            <sqlUpdate>SELECT 'update gd_warning_information set run_time = next_time , next_time = next_time + interval '''||INTERVAL||''' day to minute  
+                       where id = '''||id||'''' FROM gd_warning_information t where id =  </sqlUpdate>
+            <!-- 根据limit_time更新state状态，防止程序出错影响next_time更新 -->
+            <sqlMonitor>update gd_warning_information set state = '0' where state = '1' and sysdate > limt_time </sqlMonitor>       <!--; update gd_information_configureaa set next_time = next_time + 30/24/60 where sysdate > next_time and state = 1 and limt_time > sysdate  -->   
+            <!-- 文件配置表 -->
+	        <gd_configure>select * from gd_warning_class</gd_configure>
+	        <!-- 手机号设置表 -->
+	        <gd_mobile_configure>select mobile from gd_warning_mobile</gd_mobile_configure>
+	        <!-- 信息配置表 -->
+	        <gd_information_configure>select ID , class_id , RUN_TIME , INTERVAL , to_char(NEXT_TIME,'yyyymmddhh24miss') , LIMT_TIME ,  STATE , SQL , WARNING_TYPE ,  DB_SET , START_TIME , END_TIME from gd_warning_information where state = '1'</gd_information_configure>
+	        <!-- 程序报错时通知管理员用户：a，b，c -->
+	        <administrator>15******65,18********84,18********92</administrator>
+	</common>
+    
+</config>

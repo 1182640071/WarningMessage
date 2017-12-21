@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Wed Jan 27 10:23:18 CST 2016
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=WarningMessage.jar
+manifest.mergeall=true
+manifest.mainclass=guodu.net.warning.start.Start
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=
+includes=
